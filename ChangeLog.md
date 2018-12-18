@@ -1,0 +1,4 @@
+Upcoming
+=======
+
+* Export `Fading` constructors
