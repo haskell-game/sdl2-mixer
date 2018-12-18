@@ -167,10 +167,9 @@ module SDL.Mixer
   ) where
 
 import Control.Exception (throwIO)
-import Control.Exception.Lifted (finally)
 import Control.Monad (void, forM, when)
 import Control.Monad.IO.Class (MonadIO, liftIO)
-import Control.Monad.Trans.Control (MonadBaseControl)
+import Control.Monad.IO.Unlift (MonadUnliftIO)
 import Data.Bits ((.|.), (.&.))
 import Data.ByteString (ByteString, readFile)
 import Data.ByteString.Unsafe (unsafeUseAsCStringLen)
@@ -192,6 +191,7 @@ import SDL (SDLException(SDLCallFailed))
 import SDL.Internal.Exception
 import SDL.Raw.Filesystem (rwFromConstMem)
 import System.IO.Unsafe (unsafePerformIO)
+import UnliftIO.Exception (finally)
 
 import qualified SDL.Raw
 import qualified SDL.Raw.Mixer
@@ -243,7 +243,7 @@ version = liftIO $ do
 --
 -- Automatically cleans up the API when the inner computation finishes.
 withAudio
-  :: (MonadBaseControl IO m, MonadIO m) => Audio -> ChunkSize -> m a -> m a
+  :: MonadUnliftIO m => Audio -> ChunkSize -> m a -> m a
 withAudio conf csize act = do
   openAudio conf csize
   finally act closeAudio
