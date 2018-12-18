@@ -507,7 +507,8 @@ playedLast (Channel c) = do
 -- | Use this value when you wish to perform an operation on /all/ 'Channel's.
 --
 -- For more information, see each of the functions accepting a 'Channel'.
-pattern AllChannels = (-1) :: Channel
+pattern AllChannels :: Channel
+pattern AllChannels = -1
 
 instance HasVolume Channel where
   setVolume v (Channel c) =
@@ -527,10 +528,12 @@ playForever = void . playOn (-1) Forever
 newtype Times = Times CInt deriving (Eq, Ord, Enum, Integral, Real, Num)
 
 -- | A shorthand for playing once.
-pattern Once = 1 :: Times
+pattern Once :: Times
+pattern Once = 1
 
 -- | A shorthand for looping a 'Chunk' forever.
-pattern Forever = 0 :: Times
+pattern Forever :: Times
+pattern Forever = 0
 
 -- | Same as 'play', but plays the 'Chunk' using a given 'Channel' a certain
 -- number of 'Times'.
@@ -549,7 +552,8 @@ type Milliseconds = Int
 type Limit = Milliseconds
 
 -- | A lack of an upper limit.
-pattern NoLimit = (-1) :: Limit
+pattern NoLimit :: Limit
+pattern NoLimit = -1
 
 -- | Same as 'playOn', but imposes an upper limit in 'Milliseconds' to how long
 -- the 'Chunk' can play.
@@ -724,7 +728,8 @@ fading (Channel c) =
 newtype Group = Group CInt deriving (Eq, Ord, Enum, Integral, Real, Num)
 
 -- | The default 'Group' all 'Channel's are in the moment they are created.
-pattern DefaultGroup = (-1) :: Group
+pattern DefaultGroup :: Group
+pattern DefaultGroup = -1
 
 -- | Assigns a given 'Channel' to a certain 'Group'.
 --
@@ -1030,7 +1035,8 @@ type EffectFinished = Channel -> IO ()
 --
 -- You can only use this value with 'effect' and the other in-built effect
 -- functions such as 'effectPan' and 'effectDistance'.
-pattern PostProcessing = SDL.Raw.Mixer.CHANNEL_POST :: Channel
+pattern PostProcessing :: Channel
+pattern PostProcessing = SDL.Raw.Mixer.CHANNEL_POST
 
 -- | Adds a post-processing 'Effect' to a certain 'Channel'.
 --
