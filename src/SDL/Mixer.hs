@@ -95,7 +95,7 @@ module SDL.Mixer
   , paused
   , pausedCount
   , playedLast
-  , Fading
+  , Fading(..)
   , fading
 
   -- ** Fading out
