@@ -1,5 +1,5 @@
-#include "SDL2/SDL.h"
-#include "SDL2/SDL_mixer.h"
+#include "SDL.h"
+#include "SDL_mixer.h"
 
 // These were all macros in SDL_mixer.h.
 
